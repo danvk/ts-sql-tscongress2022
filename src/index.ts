@@ -11,14 +11,7 @@ const port = 3000;
 
 app.get('/', (req, res) => {
   (async () => {
-    interface Book {
-        id: string;
-        created_by: string;
-        title: string;
-        publication_year: number | null;
-        contents: string | null;
-    }
-    const books = await pool.query<Book>(`SELECT * FROM book`);
+    const books = await pool.query(`SELECT * FROM book`);
     const bookRows = books.rows.map(book => (
         `<tr>
             <td>${book.title}</td>
