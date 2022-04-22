@@ -1,5 +1,7 @@
 import express from "express";
 import { Pool } from "pg";
+import {sql} from "@pgtyped/query";
+import { IGetBooksQuery } from "./index.types";
 
 const pool = new Pool({
     // In practice this would be set some other way
@@ -9,10 +11,12 @@ const pool = new Pool({
 const app = express();
 const port = 3000;
 
+const getBooks = sql<IGetBooksQuery>`SELECT * FROM book`;
+
 app.get('/', (req, res) => {
   (async () => {
-    const books = await pool.query(`SELECT * FROM book`);
-    const bookRows = books.rows.map(book => (
+    const books = await getBooks.run(undefined, pool);
+    const bookRows = books.map(book => (
         `<tr>
             <td>${book.title}</td>
             <td>${book.year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.year} year(s) ago)`}</td>
