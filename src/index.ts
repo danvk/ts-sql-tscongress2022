@@ -9,13 +9,24 @@ const pool = new Pool({
 const app = express();
 const port = 3000;
 
+// #section
+// <td>${book.publication_year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)`}</td>
+// #/section
+
 app.get('/', (req, res) => {
   (async () => {
-    const books = await pool.query(`SELECT * FROM book`);
+    interface Book {
+      id: string;
+      created_by: string;
+      title: string;
+      publication_year: number | null;
+      contents: string | null;
+    }
+    const books = await pool.query<Book>(`SELECT * FROM book`);
     const bookRows = books.rows.map(book => (
         `<tr>
             <td>${book.title}</td>
-            <td>${book.year} (${new Date().getFullYear() - book.year} year(s) ago)</td>
+            <td>${book.publication_year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)`}</td>
         </tr>`
     ));
 
