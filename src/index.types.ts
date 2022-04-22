@@ -8,7 +8,7 @@ export interface IGetBooksResult {
   contents: string | null;
   created_by: string;
   id: string;
-  publication_year: number;
+  publication_year: number | null;
   title: string | null;
 }
 
