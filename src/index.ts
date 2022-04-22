@@ -12,10 +12,11 @@ const port = 3000;
 
 app.get('/', (req, res) => {
   (async () => {
-    const books = await knexDb('book').select();
+    const books = await knexDb('book').join('users', 'book.created_by', 'users.id').select();
     const bookRows = books.map(book => (
         `<tr>
             <td>${book.title}</td>
+            <td>${book.name}</td>
             <td>${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)</td>
         </tr>`
     ));
