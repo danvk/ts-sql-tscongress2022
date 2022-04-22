@@ -1,9 +1,10 @@
 import express from "express";
-import { Pool } from "pg";
+import { knex } from 'knex';
 
-const pool = new Pool({
+const knexDb = knex({
+    client: 'pg',
     // In practice this would be set some other way
-    connectionString: 'postgres://danvk@localhost:5432/postgres',
+    connection: 'postgres://danvk@localhost:5432/postgres',
 });
 
 const app = express();
@@ -11,18 +12,11 @@ const port = 3000;
 
 app.get('/', (req, res) => {
   (async () => {
-    interface Book {
-        id: string;
-        created_by: string;
-        title: string;
-        publication_year: number | null;
-        contents: string | null;
-    }
-    const books = await pool.query<Book>(`SELECT * FROM book`);
-    const bookRows = books.rows.map(book => (
+    const books = await knexDb('book').select();
+    const bookRows = books.map(book => (
         `<tr>
             <td>${book.title}</td>
-            <td>${book.publication_year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)`}</td>
+            <td>${book.year} (${new Date().getFullYear() - book.year} year(s) ago)</td>
         </tr>`
     ));
 
