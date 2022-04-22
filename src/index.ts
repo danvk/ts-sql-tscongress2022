@@ -11,10 +11,18 @@ const pool = new Pool({
 const app = express();
 const port = 3000;
 
+// #section
 const getBooks = sql<IGetBooksQuery>`SELECT book.*, author.name as author_name FROM book JOIN users as author ON created_by = author.id;`;
+// /section
+
+// const getBooks = sql<IGetBooksQuery>`SELECT * FROM book;`;
 
 app.get('/', (req, res) => {
   (async () => {
+    // #section
+    // <td>${book.publication_year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)`}</td>
+    // /section
+
     const books = await getBooks.run(undefined, pool);
     const bookRows = books.map(book => (
         `<tr>
