@@ -19,20 +19,20 @@ export interface Book {
   id: string;
   created_by: string;
   title: string | null;
-  publication_year: number;
+  publication_year: number | null;
   contents: string | null;
 }
 export interface BookInput {
   id?: string;
   created_by: string;
   title?: string | null;
-  publication_year: number;
+  publication_year?: number | null;
   contents?: string | null;
 }
 const book = {
   tableName: 'book',
   columns: ['id', 'created_by', 'title', 'publication_year', 'contents'],
-  requiredForInsert: ['created_by', 'publication_year'],
+  requiredForInsert: ['created_by'],
   primaryKey: 'id',
   foreignKeys: { created_by: { table: 'users', column: 'id', $type: null as unknown as Users }, },
   $type: null as unknown as Book,

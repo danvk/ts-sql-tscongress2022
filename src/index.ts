@@ -10,14 +10,22 @@ const knexDb = knex({
 const app = express();
 const port = 3000;
 
+// #section
+// const books = await knexDb('book').join('users', 'book.created_by', 'users.id').select();
+// /section
+
 app.get('/', (req, res) => {
   (async () => {
+    // #section
+    // <td>${book.publication_year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)`}</td>
+    // /section
+
     const books = await knexDb('book').join('users', 'book.created_by', 'users.id').select();
     const bookRows = books.map(book => (
         `<tr>
             <td>${book.title}</td>
             <td>${book.name}</td>
-            <td>${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)</td>
+            <td>${book.publication_year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)`}</td>
         </tr>`
     ));
 
