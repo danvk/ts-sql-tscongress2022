@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     const bookRows = books.map(book => (
         `<tr>
             <td>${book.title}</td>
-            <td>${book.year} (${new Date().getFullYear() - book.year} year(s) ago)</td>
+            <td>${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)</td>
         </tr>`
     ));
 
