@@ -5,6 +5,7 @@ export type IGetBooksParams = void;
 
 /** 'GetBooks' return type */
 export interface IGetBooksResult {
+  author_name: string;
   contents: string | null;
   created_by: string;
   id: string;

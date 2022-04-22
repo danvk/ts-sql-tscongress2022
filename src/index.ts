@@ -11,7 +11,7 @@ const pool = new Pool({
 const app = express();
 const port = 3000;
 
-const getBooks = sql<IGetBooksQuery>`SELECT * FROM book`;
+const getBooks = sql<IGetBooksQuery>`SELECT book.*, author.name as author_name FROM book JOIN users as author ON created_by = author.id;`;
 
 app.get('/', (req, res) => {
   (async () => {
@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
     const bookRows = books.map(book => (
         `<tr>
             <td>${book.title}</td>
+            <td>${book.author_name}</td>
             <td>${book.publication_year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)`}</td>
         </tr>`
     ));
