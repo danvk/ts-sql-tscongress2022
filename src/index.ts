@@ -1,5 +1,6 @@
 import express from "express";
 import { knex } from 'knex';
+import { Book } from "./dbschema";
 
 const knexDb = knex({
     client: 'pg',
@@ -12,7 +13,7 @@ const port = 3000;
 
 app.get('/', (req, res) => {
   (async () => {
-    const books = await knexDb('book').select();
+    const books = await knexDb<Book>('book').select();
     const bookRows = books.map(book => (
         `<tr>
             <td>${book.title}</td>
