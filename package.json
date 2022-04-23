@@ -16,6 +16,7 @@
   "dependencies": {
     "@pgtyped/cli": "^0.13.0",
     "@pgtyped/query": "^0.13.0",
+    "crudely-typed": "^0.1.0",
     "express": "^4.17.3",
     "knex": "^2.0.0",
     "pg": "^8.7.3",

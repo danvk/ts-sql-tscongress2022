@@ -2,6 +2,8 @@ import express from "express";
 import { Pool } from "pg";
 import {sql} from "@pgtyped/query";
 import { IGetBooksQuery } from "./index.types";
+import { TypedSQL } from "crudely-typed";
+import { tables } from "./dbschema";
 
 const pool = new Pool({
     // In practice this would be set some other way
@@ -11,23 +13,20 @@ const pool = new Pool({
 const app = express();
 const port = 3000;
 
-// #section
-const getBooks = sql<IGetBooksQuery>`SELECT book.*, author.name as author_name FROM book JOIN users as author ON created_by = author.id;`;
-// /section
+const typedDb = new TypedSQL(tables);
 
-// const getBooks = sql<IGetBooksQuery>`SELECT * FROM book;`;
+// #section
+// const getBooks = sql<IGetBooksQuery>`SELECT book.*, author.name as author_name FROM book JOIN users as author ON created_by = author.id;`;
+const getBooks = typedDb.table('book').select({join: {author: 'created_by'}});
+// /section
 
 app.get('/', (req, res) => {
   (async () => {
-    // #section
-    // <td>${book.publication_year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)`}</td>
-    // /section
-
-    const books = await getBooks.run(undefined, pool);
+    const books = await getBooks(pool);
     const bookRows = books.map(book => (
         `<tr>
             <td>${book.title}</td>
-            <td>${book.author_name}</td>
+            <td>${book.author.name}</td>
             <td>${book.publication_year === null ? '???' : `${book.publication_year} (${new Date().getFullYear() - book.publication_year} year(s) ago)`}</td>
         </tr>`
     ));

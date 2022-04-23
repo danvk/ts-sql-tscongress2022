@@ -488,6 +488,11 @@ create-require@^1.1.0:
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
+crudely-typed@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/crudely-typed/-/crudely-typed-0.1.0.tgz#6d73f65a4dc49fd48b53bcaf2cb4a70e7efc7c79"
+  integrity sha512-xJMj3IxN/HZff6JrnpqJJtK7rq2ZMxrMC/5HayZK4fRpWzdCLT00HYzHc1jDRnGAPYwSdO4dlimRwV1GKsv9nQ==
+
 crypto-random-string@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
