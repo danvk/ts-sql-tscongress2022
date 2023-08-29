@@ -4,12 +4,12 @@ This repo contains the sample code for my 2022 TS Congress Talk: ["TypeScript an
 
 This repo has six branches corresponding to the six techniques described in the post:
 
-- `raw-sql`: Raw SQL + Hand-coded types
+- [`raw-sql`]: Raw SQL + Hand-coded types
 - ORMs (e.g. [TypeORM])
-- `pg-to-ts`: Schema Generator (e.g. [pg-to-ts])
-- `knex`: Query Builder (e.g. [knex.js])
-- `pgtyped`: SQL → TS (e.g. [PgTyped])
-- `crudely-typed`: Hybrid Query Builder (e.g. [crudely-typed]) + PgTyped
+- [`pg-to-ts`][pg2tsb]: Schema Generator (e.g. [pg-to-ts])
+- [`knex`]: Query Builder (e.g. [knex.js])
+- [`pgtyped`][pgtb]: SQL → TS (e.g. [PgTyped])
+- [`crudely-typed`][ctb]: Hybrid Query Builder (e.g. [crudely-typed]) + PgTyped
 
 [talk]: https://portal.gitnation.org/contents/typescript-and-the-database-who-owns-the-types
 [post]: https://effectivetypescript.com/
@@ -19,3 +19,9 @@ This repo has six branches corresponding to the six techniques described in the 
 [knex.js]: https://knexjs.org/
 [PgTyped]: https://github.com/adelsz/pgtyped
 [crudely-typed]: https://github.com/danvk/crudely-typed
+
+[raw-sql]: https://github.com/danvk/ts-sql-tscongress2022/tree/raw-sql
+[pg2tsb] https://github.com/danvk/ts-sql-tscongress2022/tree/pg-to-ts
+[knex]: https://github.com/danvk/ts-sql-tscongress2022/tree/knex
+[pgtb]: https://github.com/danvk/ts-sql-tscongress2022/tree/pgtyped
+[ctb]: https://github.com/danvk/ts-sql-tscongress2022/tree/crudely-typed
